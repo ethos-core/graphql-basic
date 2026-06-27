@@ -1,0 +1,17 @@
+{
+  "name": "graphql-basic-api",
+  "version": "1.0.0",
+  "description": "GraphQL Basic API",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.0",
+    "graphql": "^16.8.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}
