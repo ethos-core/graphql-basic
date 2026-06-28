@@ -169,6 +169,55 @@ const resolvers = {
     Tag: {
         posts: (tag: any) => posts.filter((p) => p.tagIds.includes(tag.id)),
     },
+    Mutation: {
+        createPost: (_: any, { input }: { input: any }) => {
+            const newPost = {
+                id: String(posts.length + 1),
+                title: input.title,
+                body: input.body,
+                published: input.published ?? false,
+                authorId: '1',
+                tagIds: input.tagIds ?? [],
+                createdAt: new Date().toISOString().split('T')[0],
+                updatedAt: new Date().toISOString().split('T')[0],
+            };
+            posts.push(newPost);
+            return newPost;
+        },
+        updatePost: (_: any, { id, input }: { id: string, input: any }) => {
+            const post = posts.find((p) => p.id === id);
+            if (!post) throw new Error(`Post not found: ${id}`);
+            if (input.title !== undefined) post.title = input.title;
+            if (input.body !== undefined) post.body = input.body;
+            if (input.published !== undefined) post.published = input.published;
+            if (input.tagIds !== undefined) post.tagIds = input.tagIds;
+            post.updatedAt = new Date().toISOString().split('T')[0];
+            return post;
+        },
+        deletePost: (_: any, { id }: { id: string }) => {
+            const index = posts.findIndex((p) => p.id === id);
+            if (index === -1) return false;
+            posts.splice(index, 1);
+            return true;
+        },
+        createComment: (_: any, { postId, input }: { postId: string, input: any }) => {
+            const newComment = {
+                id: String(comments.length + 1),
+                body: input.body,
+                authorId: '1',
+                postId,
+                createdAt: new Date().toISOString().split('T')[0],
+            };
+            comments.push(newComment);
+            return newComment;
+        },
+        deleteComment: (_: any, { id }: { id: string }) => {
+            const index = comments.findIndex((c) => c.id === id);
+            if (index === -1) return false;
+            comments.splice(index, 1);
+            return true;
+        },
+    },
 }
 
 const server = new ApolloServer({ typeDefs, resolvers });
