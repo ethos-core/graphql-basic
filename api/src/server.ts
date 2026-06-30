@@ -6,7 +6,7 @@ const typeDefs = `#graphql
         id: ID!
         name: String!
         email: String!
-        avatar: String!
+        avatar: String
         posts: [Post!]!
         createdAt: String!
     }

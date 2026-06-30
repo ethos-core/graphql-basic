@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client/react';
 import { GET_POSTS } from '../graphql/queries';
+import { PostCard } from './PostCard';
 
 export function PostList() {
     const { data, loading, error, fetchMore } = useQuery(GET_POSTS, {
@@ -21,15 +22,7 @@ export function PostList() {
         <div>
             <h2 className="post-list-header">Posts</h2>
             {edges.map(({ node }: any) => (
-                <article key={node.id} className="post-card">
-                    <h3>{node.title}</h3>
-                    <p className="meta">by {node.author.name} &middot; {node.createdAt}</p>
-                    <div className="tags">
-                        {node.tags.map((t: any) => (
-                            <span key={t.id} className="tag">{t.name}</span>
-                        ))}
-                    </div>
-                </article>
+                <PostCard key={node.id} post={node} />
             ))}
             {pageInfo.hasPageNext && (
                 <button className="btn-load-more" onClick={loadMore}>Load More</button>
