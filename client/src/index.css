@@ -21,19 +21,17 @@
   -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #111827;
-    --card: #1f2937;
-    --border: #374151;
-    --accent: #818cf8;
-    --accent-hover: #6366f1;
-    --accent-light: rgba(99, 102, 241, 0.15);
-    --tag-bg: rgba(99, 102, 241, 0.15);
-    --tag-text: #a5b4fc;
-  }
+:root[data-theme="dark"] {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --bg: #111827;
+  --card: #1f2937;
+  --border: #374151;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --accent-light: rgba(99, 102, 241, 0.15);
+  --tag-bg: rgba(99, 102, 241, 0.15);
+  --tag-text: #a5b4fc;
 }
 
 *, *::before, *::after {
